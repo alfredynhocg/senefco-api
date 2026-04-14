@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Application\PreguntasFrecuentes\Handlers;
+
+use App\Application\PreguntasFrecuentes\Commands\UpdatePreguntaFrecuenteCommand;
+use App\Application\PreguntasFrecuentes\DTOs\PreguntaFrecuenteDTO;
+use App\Domain\PreguntasFrecuentes\Contracts\PreguntaFrecuenteRepositoryInterface;
+
+class UpdatePreguntaFrecuenteHandler
+{
+    public function __construct(private readonly PreguntaFrecuenteRepositoryInterface $repository) {}
+
+    public function handle(UpdatePreguntaFrecuenteCommand $command): PreguntaFrecuenteDTO
+    {
+        return $this->repository->update($command->id, [
+            'pregunta' => $command->pregunta,
+            'respuesta' => $command->respuesta,
+            'categoria' => $command->categoria,
+            'orden' => $command->orden,
+            'activo' => $command->activo,
+        ]);
+    }
+}
