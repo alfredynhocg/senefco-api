@@ -1,4 +1,4 @@
-# Changelog — SENEFCO
+# Changelog — cenefco
 
 Todos los cambios notables del proyecto se documentan aquí.
 
@@ -19,9 +19,9 @@ Cambios en desarrollo que aún no tienen versión asignada.
 
 - 145 migraciones Laravel generadas a partir del esquema legado SIASEC (`disereco_siasec_backup.sql`)
 - Cobertura completa de tablas: usuarios, niveles, grupos de permisos, materias, planes, inscripciones, notas, horarios, pagos, documentos, programas, catálogos, contenido web y sus espejos `_log`
-- Nomenclatura unificada: archivos con prefijo `senefco_` en el nombre, tablas con nombres originales (`t_`, `mdl_`)
+- Nomenclatura unificada: archivos con prefijo `cenefco_` en el nombre, tablas con nombres originales (`t_`, `mdl_`)
 - CLAUDE.md y README.md actualizados con contexto completo del esquema legado
-- Sección "Base de datos SENEFCO" en CLAUDE.md con convenciones, grupos de tablas y relaciones clave
+- Sección "Base de datos cenefco" en CLAUDE.md con convenciones, grupos de tablas y relaciones clave
 
 ### Convenciones aplicadas en migraciones legado
 

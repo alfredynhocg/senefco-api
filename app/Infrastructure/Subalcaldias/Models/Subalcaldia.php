@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Infrastructure\Subsenefcos\Models;
+namespace App\Infrastructure\Subcenefcos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Subsenefco extends Model
+class Subcenefco extends Model
 {
-    protected $table = 'subsenefcos';
+    protected $table = 'subcenefcos';
 
     public $timestamps = false; // Based on migration having only created_at
 

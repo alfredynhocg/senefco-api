@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
     properties: [
         new OA\Property(property: 'id', type: 'integer', example: 1),
         new OA\Property(property: 'titulo', type: 'string', example: 'Alcaldía inaugura nuevo parque'),
-        new OA\Property(property: 'slug', type: 'string', example: 'senefco-inaugura-nuevo-parque'),
+        new OA\Property(property: 'slug', type: 'string', example: 'cenefco-inaugura-nuevo-parque'),
         new OA\Property(property: 'entradilla', type: 'string', nullable: true, example: 'El nuevo parque beneficiará a más de 5.000 vecinos'),
         new OA\Property(property: 'imagen_principal_url', type: 'string', nullable: true),
         new OA\Property(property: 'estado', type: 'string', enum: ['borrador', 'publicado', 'archivado'], example: 'publicado'),

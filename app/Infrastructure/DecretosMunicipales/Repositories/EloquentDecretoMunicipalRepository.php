@@ -33,7 +33,7 @@ class EloquentDecretoMunicipalRepository implements DecretoMunicipalRepositoryIn
             ->paginate($pagination->pageSize, ['*'], 'page', $pagination->pageIndex);
 
         return [
-            'data'  => collect($paginated->items())->map(fn ($m) => DecretoMunicipalDTO::fromModel($m))->all(),
+            'data' => collect($paginated->items())->map(fn ($m) => DecretoMunicipalDTO::fromModel($m))->all(),
             'total' => $paginated->total(),
         ];
     }

@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: 'slug', type: 'string', example: 'secretaria-de-obras-publicas'),
         new OA\Property(property: 'direccion_fisica', type: 'string', nullable: true),
         new OA\Property(property: 'telefono', type: 'string', nullable: true, example: '2123456'),
-        new OA\Property(property: 'email', type: 'string', nullable: true, example: 'seop@senefco.gob.bo'),
+        new OA\Property(property: 'email', type: 'string', nullable: true, example: 'seop@cenefco.gob.bo'),
         new OA\Property(property: 'horario_atencion', type: 'string', nullable: true, example: '8:00 - 16:00'),
         new OA\Property(property: 'orden_organigrama', type: 'integer', example: 1),
         new OA\Property(property: 'activa', type: 'boolean', example: true),

@@ -387,9 +387,9 @@ class WhatsAppService
 
             Log::error('[WhatsAppService] uploadMedia error', [
                 'status' => $response->status(),
-                'error'  => $message,
-                'file'   => basename($filePath),
-                'mime'   => $mime,
+                'error' => $message,
+                'file' => basename($filePath),
+                'mime' => $mime,
             ]);
 
             throw new \RuntimeException("WhatsApp uploadMedia error ({$response->status()}): {$message}");

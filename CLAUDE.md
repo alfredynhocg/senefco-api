@@ -7,7 +7,7 @@
 
 ## Qué es este proyecto
 
-**SENEFCO API** es una API REST construida con Laravel 12 para la gestión de cursos, diplomados y programas de formación continua. Centraliza la administración de estudiantes, inscripciones, notas, pagos, docentes y la estructura académica de los programas.
+**cenefco API** es una API REST construida con Laravel 12 para la gestión de cursos, diplomados y programas de formación continua. Centraliza la administración de estudiantes, inscripciones, notas, pagos, docentes y la estructura académica de los programas.
 Implementa **DDD (Domain-Driven Design) + CQRS** de forma estricta en todas las capas.
 
 Stack: PHP 8.2 · Laravel 12 · MySQL 8 · Laravel Sanctum · DomPDF · Spatie Laravel Settings
@@ -507,7 +507,7 @@ Las settings se guardan en la tabla `settings`. No usar `config()` para datos qu
 
 ---
 
-## Base de datos SENEFCO (legado SIASEC)
+## Base de datos cenefco (legado SIASEC)
 
 El proyecto incluye **145 migraciones** generadas a partir del sistema legado SIASEC (`disereco_siasec`), correspondiente al sistema académico de posgrado (UPEA). Estas tablas conviven en la misma BD que las tablas propias del proyecto.
 
@@ -516,10 +516,10 @@ El proyecto incluye **145 migraciones** generadas a partir del sistema legado SI
 Todos los archivos de migración del legado siguen el patrón:
 
 ```text
-2026_04_14_NNNNNN_create_senefco_{tabla}_table.php
+2026_04_14_NNNNNN_create_cenefco_{tabla}_table.php
 ```
 
-Ejemplo: `2026_04_14_000134_create_senefco_t_usuario_table.php`
+Ejemplo: `2026_04_14_000134_create_cenefco_t_usuario_table.php`
 
 ### Grupos de tablas
 
@@ -544,11 +544,11 @@ Ejemplo: `2026_04_14_000134_create_senefco_t_usuario_table.php`
 - Las tablas `_log` registran el historial de cambios y tienen un campo `tipo_log` varchar.
 - `id_us_reg` = usuario que registró el dato (auditoría interna del sistema legado).
 
-### Ejecutar solo migraciones SENEFCO
+### Ejecutar solo migraciones cenefco
 
 ```bash
 # Correr únicamente las 145 migraciones del legado
-php artisan migrate --path=database/migrations --filter=senefco
+php artisan migrate --path=database/migrations --filter=cenefco
 ```
 
 ### Relaciones clave entre tablas legado

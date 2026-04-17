@@ -18,11 +18,18 @@ enum BotButton: string
     case SEGUIMIENTO = 'btn_seguimiento';
 
     const PREFIX_TRAMITE = 'tramite_';
+
     const PREFIX_NOTICIA = 'noticia_';
+
     const PREFIX_COMUNICADO = 'comunicado_';
+
     const PREFIX_EVENTO = 'evento_';
+
     const PREFIX_SECRETARIA = 'sec_';
+
     const PREFIX_AUTORIDAD = 'autoridad_';
+
     const PREFIX_AUDIENCIA = 'audiencia_';
+
     const PREFIX_INICIAR_TRAMITE = 'iniciar_tramite_';
 }

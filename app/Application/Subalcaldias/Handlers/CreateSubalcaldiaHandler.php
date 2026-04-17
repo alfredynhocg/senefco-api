@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Application\Subsenefcos\Handlers;
+namespace App\Application\Subcenefcos\Handlers;
 
-use App\Application\Subsenefcos\Commands\CreateSubsenefcoCommand;
-use App\Application\Subsenefcos\DTOs\SubsenefcoDTO;
-use App\Domain\Subsenefcos\Contracts\SubsenefcoRepositoryInterface;
+use App\Application\Subcenefcos\Commands\CreateSubcenefcoCommand;
+use App\Application\Subcenefcos\DTOs\SubcenefcoDTO;
+use App\Domain\Subcenefcos\Contracts\SubcenefcoRepositoryInterface;
 
-class CreateSubsenefcoHandler
+class CreateSubcenefcoHandler
 {
-    public function __construct(private readonly SubsenefcoRepositoryInterface $repository) {}
+    public function __construct(private readonly SubcenefcoRepositoryInterface $repository) {}
 
-    public function handle(CreateSubsenefcoCommand $command): SubsenefcoDTO
+    public function handle(CreateSubcenefcoCommand $command): SubcenefcoDTO
     {
         return $this->repository->create([
             'nombre' => $command->nombre,

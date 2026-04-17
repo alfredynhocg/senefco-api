@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('meta_titulo', 300)->nullable()->after('vistas');
             $table->string('meta_descripcion', 500)->nullable()->after('meta_titulo');
             $table->string('estado_web', 50)->default('borrador')->after('meta_descripcion');
-            // borrador | publicado | archivado
             $table->timestampTz('updated_at')->nullable()->after('fecha_reg');
             $table->timestampTz('deleted_at')->nullable()->after('updated_at');
         });

@@ -1,4 +1,4 @@
-# Análisis de Migraciones — senefco_api
+# Análisis de Migraciones — cenefco_api
 ## Objetivo: Página Web Institucional para Promoción de Cursos
 
 > Fecha de análisis: 2026-04-15  
@@ -1030,7 +1030,7 @@ No es solo "poner el enlace de Facebook". Esta tabla también guarda los IDs de 
 Schema::create('web_redes_sociales', function (Blueprint $table) {
     $table->bigIncrements('id');
     $table->string('red', 50);                    // facebook | instagram | youtube | linkedin | tiktok | x
-    $table->string('nombre_display', 100)->nullable(); // "SENEFCO Oficial"
+    $table->string('nombre_display', 100)->nullable(); // "cenefco Oficial"
     $table->string('url', 255)->nullable();        // Enlace al perfil
     $table->string('icono_clase', 100)->nullable(); // fa-facebook, fa-instagram
     $table->string('pixel_id', 100)->nullable();   // Facebook Pixel ID, GA4 ID, etc.
@@ -1152,7 +1152,7 @@ MÓDULO CERTIFICADOS
 5. El sistema genera certificados en lote:
    a. Carga la imagen JPG de la plantilla
    b. Escribe el nombre y datos del estudiante en las posiciones configuradas
-   c. Genera un código único (ej: SENEFCO-2026-A4X9K2)
+   c. Genera un código único (ej: cenefco-2026-A4X9K2)
    d. Genera el QR con la URL de verificación pública
    e. Embebe el QR en la imagen en la posición configurada
    f. Guarda el archivo JPG/PDF final
@@ -1235,7 +1235,7 @@ Schema::create('t_cert_plantilla_campo', function (Blueprint $table) {
 | `fecha_fin` | Fecha fin del curso |
 | `duracion_horas` | Horas académicas del curso |
 | `nota` | Nota final obtenida |
-| `codigo_verificacion` | Código único (ej: SENEFCO-2026-A4X9K2) |
+| `codigo_verificacion` | Código único (ej: cenefco-2026-A4X9K2) |
 | `qr_image` | Imagen QR generada apuntando a la URL de verificación |
 | `valor_fijo` | Texto estático (firma, cargo del director, etc.) |
 
@@ -1296,7 +1296,7 @@ Schema::create('t_certificado', function (Blueprint $table) {
     $table->date('fecha_inicio_curso')->nullable();
     $table->date('fecha_fin_curso')->nullable();
     // Identificación única
-    $table->string('codigo_verificacion', 50)->unique(); // SENEFCO-2026-A4X9K2
+    $table->string('codigo_verificacion', 50)->unique(); // cenefco-2026-A4X9K2
     $table->string('qr_url', 500)->nullable();           // URL completa que codifica el QR
     // Archivos generados
     $table->string('archivo_url', 500)->nullable();      // Ruta del JPG/PDF final generado
@@ -1326,9 +1326,9 @@ Schema::create('t_certificado', function (Blueprint $table) {
 **Formato del `codigo_verificacion`:**
 
 ```php
-// Formato: SENEFCO-{AÑO}-{6 caracteres alfanuméricos en mayúsculas}
-// Ejemplo:  SENEFCO-2026-A4X9K2
-$codigo = 'SENEFCO-' . date('Y') . '-' . strtoupper(Str::random(6));
+// Formato: cenefco-{AÑO}-{6 caracteres alfanuméricos en mayúsculas}
+// Ejemplo:  cenefco-2026-A4X9K2
+$codigo = 'cenefco-' . date('Y') . '-' . strtoupper(Str::random(6));
 // Validar que sea único antes de guardar
 ```
 
@@ -1383,7 +1383,7 @@ foreach ($aprobados as $aprobado) {
                 escribirTexto($imagen, $campo, $aprobado->usuario->nombre_completo);
                 break;
             case 'codigo_verificacion':
-                $codigo = generarCodigoUnico(); // SENEFCO-2026-XXXXXX
+                $codigo = generarCodigoUnico(); // cenefco-2026-XXXXXX
                 escribirTexto($imagen, $campo, $codigo);
                 break;
             case 'qr_image':

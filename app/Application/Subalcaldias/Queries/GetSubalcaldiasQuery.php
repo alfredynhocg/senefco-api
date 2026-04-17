@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Application\Subsenefcos\Queries;
+namespace App\Application\Subcenefcos\Queries;
 
 use App\Shared\Kernel\DTOs\PaginationDTO;
 
-final readonly class GetSubsenefcosQuery
+final readonly class GetSubcenefcosQuery
 {
     public function __construct(
         public PaginationDTO $pagination,

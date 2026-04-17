@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
     properties: [
         new OA\Property(property: 'id', type: 'integer', example: 1),
         new OA\Property(property: 'nombre', type: 'string', example: 'Juan Pérez'),
-        new OA\Property(property: 'email', type: 'string', format: 'email', example: 'admin@senefco.gob.bo'),
+        new OA\Property(property: 'email', type: 'string', format: 'email', example: 'admin@cenefco.gob.bo'),
         new OA\Property(property: 'tipo', type: 'string', example: 'admin'),
         new OA\Property(property: 'activo', type: 'boolean', example: true),
         new OA\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
@@ -33,7 +33,7 @@ class AuthSwagger
             content: new OA\JsonContent(
                 required: ['email', 'password'],
                 properties: [
-                    new OA\Property(property: 'email', type: 'string', format: 'email', example: 'admin@senefco.gob.bo'),
+                    new OA\Property(property: 'email', type: 'string', format: 'email', example: 'admin@cenefco.gob.bo'),
                     new OA\Property(property: 'password', type: 'string', format: 'password', example: 'secret'),
                 ]
             )

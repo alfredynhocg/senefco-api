@@ -1,7 +1,7 @@
 # Análisis de Seguridad — API Alcaldía Municipal
 
 > Fecha: 2026-04-08  
-> Alcance: `api_senefco` — endpoints públicos `/api/v1/portal/*` y configuración general  
+> Alcance: `api_cenefco` — endpoints públicos `/api/v1/portal/*` y configuración general  
 > Contexto: Portal institucional municipal boliviano. Las rutas `/portal/*` son intencionalmente públicas para el frontend ciudadano.
 
 ---
@@ -126,7 +126,7 @@ return [
     'allowed_origins' => [
         'http://localhost:4200',   // Frontend dev
         'http://localhost:61936',  // Otro puerto dev
-        'https://www.senefco-achocalla.gob.bo',  // Producción frontend
+        'https://www.cenefco-achocalla.gob.bo',  // Producción frontend
     ],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -265,7 +265,7 @@ DragonBound va más allá con un ASCII art de advertencia anti-cheat/anti-manipu
 
 Ambas son medidas de **seguridad del frontend**, no del backend.
 
-### Implementación recomendada para `frontend_senefco`
+### Implementación recomendada para `frontend_cenefco`
 
 Agregar en `src/main.ts` (se ejecuta una sola vez al iniciar la app):
 
@@ -445,7 +445,7 @@ final readonly class {Modulo}PublicDTO
 | 5 | **Eventos** | `/portal/eventos`, `/portal/eventos/{id}` | 🟠 Alto | `tipo_evento_id`, `creado_por`, `estado`, `created_at` | `id`*, `titulo`, `slug`, `descripcion`, `lugar`, `latitud`, `longitud`, `fecha_inicio`, `fecha_fin`, `todo_el_dia`, `url_transmision`, `publico`, `tipo_nombre` |
 | 6 | **Autoridades** | `/portal/autoridades`, `/portal/autoridades/{id}` | 🟡 Medio | `secretaria_id`, `activo`, `orden` | `nombre`, `apellido`, `cargo`, `tipo`, `perfil_profesional`, `email_institucional`, `foto_url`, `fecha_inicio_cargo`, `fecha_fin_cargo`, `slug` |
 | 7 | **Secretarias** | `/portal/secretarias`, `/portal/secretarias/{id}` | 🟡 Medio | `activa`, `orden_organigrama`, `created_at` | `nombre`, `sigla`, `atribuciones`, `direccion_fisica`, `telefono`, `email`, `horario_atencion`, `foto_titular_url`, `slug` |
-| 8 | **Subsenefcos** | `/portal/subsenefcos`, `/portal/subsenefcos/{id}` | 🟡 Medio | `activa` (o `activo`), `created_at` | campos de visualización pública |
+| 8 | **Subcenefcos** | `/portal/subcenefcos`, `/portal/subcenefcos/{id}` | 🟡 Medio | `activa` (o `activo`), `created_at` | campos de visualización pública |
 | 9 | **BannersPortal** | `/portal/banners`, `/portal/banners/{id}` | 🟡 Medio | `activo`, `orden` | `titulo`, `descripcion`, `imagen_url`, `enlace_url`, `fecha_inicio`, `fecha_fin` |
 | 10 | **DocumentosTransparencia** | `/portal/documentos-transparencia`, `/portal/documentos-transparencia/{id}` | 🟡 Medio | `activo` o `estado` interno, `created_at` | campos de visualización pública |
 | 11 | **AudienciasPublicas** | `/portal/audiencias-publicas`, `/portal/audiencias-publicas/{id}` | 🟡 Medio | `estado` interno, `created_at` | campos de visualización pública |
@@ -493,7 +493,7 @@ app/Application/Comunicados/DTOs/ComunicadoPublicDTO.php
 app/Application/Eventos/DTOs/EventoPublicDTO.php
 app/Application/Autoridades/DTOs/AutoridadPublicDTO.php
 app/Application/Secretarias/DTOs/SecretariaPublicDTO.php
-app/Application/Subsenefcos/DTOs/SubsenefcoPublicDTO.php
+app/Application/Subcenefcos/DTOs/SubcenefcoPublicDTO.php
 app/Application/BannersPortal/DTOs/BannerPortalPublicDTO.php
 app/Application/DocumentosTransparencia/DTOs/DocumentoPublicDTO.php
 app/Application/AudienciasPublicas/DTOs/AudienciaPublicaPublicDTO.php
@@ -512,7 +512,7 @@ app/Application/Eventos/QueryHandlers/GetEventosQueryHandler.php
 app/Application/Eventos/QueryHandlers/GetEventoByIdQueryHandler.php
 app/Application/Autoridades/QueryHandlers/GetAutoridadesQueryHandler.php
 app/Application/Secretarias/QueryHandlers/GetSecretariasQueryHandler.php
-app/Application/Subsenefcos/QueryHandlers/GetSubsenefcosQueryHandler.php
+app/Application/Subcenefcos/QueryHandlers/GetSubcenefcosQueryHandler.php
 app/Application/BannersPortal/QueryHandlers/GetBannersPortalQueryHandler.php
 app/Application/DocumentosTransparencia/QueryHandlers/GetDocumentosQueryHandler.php
 app/Application/AudienciasPublicas/QueryHandlers/GetAudienciasPublicasQueryHandler.php

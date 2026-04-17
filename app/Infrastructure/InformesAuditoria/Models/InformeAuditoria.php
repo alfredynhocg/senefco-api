@@ -26,10 +26,10 @@ class InformeAuditoria extends Model
     ];
 
     protected $casts = [
-        'fecha'            => 'date',
+        'fecha' => 'date',
         'publicado_en_web' => 'boolean',
-        'anio'             => 'integer',
-        'publicado_por'    => 'integer',
+        'anio' => 'integer',
+        'publicado_por' => 'integer',
     ];
 
     protected static function boot(): void
@@ -39,7 +39,7 @@ class InformeAuditoria extends Model
             if (empty($model->slug)) {
                 $base = Str::slug($model->nombre);
                 $slug = $base;
-                $i    = 1;
+                $i = 1;
                 while (static::where('slug', $slug)->exists()) {
                     $slug = $base.'-'.$i++;
                 }

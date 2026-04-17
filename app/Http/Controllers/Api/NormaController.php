@@ -8,7 +8,9 @@ use App\Application\Normas\Commands\UpdateNormaCommand;
 use App\Application\Normas\Handlers\CreateNormaHandler;
 use App\Application\Normas\Handlers\DeleteNormaHandler;
 use App\Application\Normas\Handlers\UpdateNormaHandler;
+use App\Application\Normas\Queries\GetNormaByIdQuery;
 use App\Application\Normas\Queries\GetPaginatedNormasQuery;
+use App\Application\Normas\QueryHandlers\GetNormaByIdQueryHandler;
 use App\Application\Normas\QueryHandlers\GetPaginatedNormasQueryHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Normas\StoreNormaRequest;
@@ -21,6 +23,7 @@ class NormaController extends Controller
 {
     public function __construct(
         private readonly GetPaginatedNormasQueryHandler $getPaginatedHandler,
+        private readonly GetNormaByIdQueryHandler $getByIdHandler,
         private readonly CreateNormaHandler $createHandler,
         private readonly UpdateNormaHandler $updateHandler,
         private readonly DeleteNormaHandler $deleteHandler,
@@ -43,6 +46,11 @@ class NormaController extends Controller
         ];
 
         return response()->json($this->getPaginatedHandler->handle(new GetPaginatedNormasQuery($pagination, $filters)));
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->getByIdHandler->handle(new GetNormaByIdQuery($id)));
     }
 
     public function store(StoreNormaRequest $request): JsonResponse

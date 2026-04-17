@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Infrastructure\Subsenefcos\Repositories;
+namespace App\Infrastructure\Subcenefcos\Repositories;
 
-use App\Application\Subsenefcos\DTOs\SubsenefcoDTO;
-use App\Domain\Subsenefcos\Contracts\SubsenefcoRepositoryInterface;
-use App\Domain\Subsenefcos\Exceptions\SubsenefcoNotFoundException;
-use App\Infrastructure\Subsenefcos\Models\Subsenefco;
+use App\Application\Subcenefcos\DTOs\SubcenefcoDTO;
+use App\Domain\Subcenefcos\Contracts\SubcenefcoRepositoryInterface;
+use App\Domain\Subcenefcos\Exceptions\SubcenefcoNotFoundException;
+use App\Infrastructure\Subcenefcos\Models\Subcenefco;
 use App\Shared\Kernel\DTOs\PaginationDTO;
 
-class EloquentSubsenefcoRepository implements SubsenefcoRepositoryInterface
+class EloquentSubcenefcoRepository implements SubcenefcoRepositoryInterface
 {
     public function paginate(PaginationDTO $pagination, bool $soloActivos = false): array
     {
-        $q = Subsenefco::query();
+        $q = Subcenefco::query();
 
         if ($soloActivos) {
             $q->where('activa', true);
@@ -27,51 +27,51 @@ class EloquentSubsenefcoRepository implements SubsenefcoRepositoryInterface
             ->paginate($pagination->pageSize, ['*'], 'page', $pagination->pageIndex);
 
         return [
-            'data' => collect($paginated->items())->map(fn ($m) => SubsenefcoDTO::fromModel($m))->all(),
+            'data' => collect($paginated->items())->map(fn ($m) => SubcenefcoDTO::fromModel($m))->all(),
             'total' => $paginated->total(),
         ];
     }
 
-    public function findById(int $id): SubsenefcoDTO
+    public function findById(int $id): SubcenefcoDTO
     {
-        $model = Subsenefco::find($id);
+        $model = Subcenefco::find($id);
         if (! $model) {
-            throw new SubsenefcoNotFoundException($id);
+            throw new SubcenefcoNotFoundException($id);
         }
 
-        return SubsenefcoDTO::fromModel($model);
+        return SubcenefcoDTO::fromModel($model);
     }
 
-    public function findBySlug(string $slug): SubsenefcoDTO
+    public function findBySlug(string $slug): SubcenefcoDTO
     {
-        $model = Subsenefco::where('slug', $slug)->first();
+        $model = Subcenefco::where('slug', $slug)->first();
         if (! $model) {
-            throw new SubsenefcoNotFoundException($slug);
+            throw new SubcenefcoNotFoundException($slug);
         }
 
-        return SubsenefcoDTO::fromModel($model);
+        return SubcenefcoDTO::fromModel($model);
     }
 
-    public function create(array $data): SubsenefcoDTO
+    public function create(array $data): SubcenefcoDTO
     {
-        $model = Subsenefco::create($data);
+        $model = Subcenefco::create($data);
 
-        return SubsenefcoDTO::fromModel($model);
+        return SubcenefcoDTO::fromModel($model);
     }
 
-    public function update(int $id, array $data): SubsenefcoDTO
+    public function update(int $id, array $data): SubcenefcoDTO
     {
-        $model = Subsenefco::find($id);
+        $model = Subcenefco::find($id);
         if (! $model) {
-            throw new SubsenefcoNotFoundException($id);
+            throw new SubcenefcoNotFoundException($id);
         }
         $model->update($data);
 
-        return SubsenefcoDTO::fromModel($model);
+        return SubcenefcoDTO::fromModel($model);
     }
 
     public function delete(int|array $ids): bool
     {
-        return Subsenefco::destroy($ids) > 0;
+        return Subcenefco::destroy($ids) > 0;
     }
 }

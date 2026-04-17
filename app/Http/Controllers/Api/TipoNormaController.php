@@ -9,7 +9,9 @@ use App\Application\TiposNorma\Handlers\CreateTipoNormaHandler;
 use App\Application\TiposNorma\Handlers\DeleteTipoNormaHandler;
 use App\Application\TiposNorma\Handlers\UpdateTipoNormaHandler;
 use App\Application\TiposNorma\Queries\GetAllTiposNormaQuery;
+use App\Application\TiposNorma\Queries\GetTipoNormaByIdQuery;
 use App\Application\TiposNorma\QueryHandlers\GetAllTiposNormaQueryHandler;
+use App\Application\TiposNorma\QueryHandlers\GetTipoNormaByIdQueryHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TiposNorma\StoreTipoNormaRequest;
 use App\Http\Requests\TiposNorma\UpdateTipoNormaRequest;
@@ -19,6 +21,7 @@ class TipoNormaController extends Controller
 {
     public function __construct(
         private readonly GetAllTiposNormaQueryHandler $getAllHandler,
+        private readonly GetTipoNormaByIdQueryHandler $getByIdHandler,
         private readonly CreateTipoNormaHandler $createHandler,
         private readonly UpdateTipoNormaHandler $updateHandler,
         private readonly DeleteTipoNormaHandler $deleteHandler,
@@ -27,6 +30,11 @@ class TipoNormaController extends Controller
     public function index(): JsonResponse
     {
         return response()->json($this->getAllHandler->handle(new GetAllTiposNormaQuery));
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->getByIdHandler->handle(new GetTipoNormaByIdQuery($id)));
     }
 
     public function store(StoreTipoNormaRequest $request): JsonResponse

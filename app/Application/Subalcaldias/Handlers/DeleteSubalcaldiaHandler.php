@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Application\Subsenefcos\Handlers;
+namespace App\Application\Subcenefcos\Handlers;
 
-use App\Application\Subsenefcos\Commands\DeleteSubsenefcoCommand;
-use App\Domain\Subsenefcos\Contracts\SubsenefcoRepositoryInterface;
+use App\Application\Subcenefcos\Commands\DeleteSubcenefcoCommand;
+use App\Domain\Subcenefcos\Contracts\SubcenefcoRepositoryInterface;
 
-class DeleteSubsenefcoHandler
+class DeleteSubcenefcoHandler
 {
-    public function __construct(private readonly SubsenefcoRepositoryInterface $repository) {}
+    public function __construct(private readonly SubcenefcoRepositoryInterface $repository) {}
 
-    public function handle(DeleteSubsenefcoCommand $command): bool
+    public function handle(DeleteSubcenefcoCommand $command): bool
     {
         return $this->repository->delete($command->id);
     }

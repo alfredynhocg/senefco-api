@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Subsenefcos\Queries;
+namespace App\Application\Subcenefcos\Queries;
 
-final readonly class GetSubsenefcoByIdQuery
+final readonly class GetSubcenefcoByIdQuery
 {
     public function __construct(public int $id) {}
 }

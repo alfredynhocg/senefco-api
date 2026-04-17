@@ -28,9 +28,9 @@ class DecretoMunicipal extends Model
     ];
 
     protected $casts = [
-        'publicado_en_web'   => 'boolean',
+        'publicado_en_web' => 'boolean',
         'fecha_promulgacion' => 'date',
-        'anio'               => 'integer',
+        'anio' => 'integer',
     ];
 
     protected static function boot(): void

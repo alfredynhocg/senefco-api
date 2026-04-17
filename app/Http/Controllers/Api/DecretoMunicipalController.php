@@ -33,9 +33,9 @@ class DecretoMunicipalController extends Controller
     {
         $pagination = PaginationDTO::fromArray([
             'pageIndex' => $request->get('pageIndex', 1),
-            'pageSize'  => $request->get('pageSize', 15),
-            'query'     => $request->get('query', ''),
-            'sortKey'   => $request->input('sort.key', 'created_at'),
+            'pageSize' => $request->get('pageSize', 15),
+            'query' => $request->get('query', ''),
+            'sortKey' => $request->input('sort.key', 'created_at'),
             'sortOrder' => $request->input('sort.order', 'desc'),
         ]);
 
@@ -60,17 +60,17 @@ class DecretoMunicipalController extends Controller
     public function store(StoreDecretoMunicipalRequest $request): JsonResponse
     {
         $dto = $this->createHandler->handle(new CreateDecretoMunicipalCommand(
-            numero:             $request->numero,
-            tipo:               $request->tipo ?? 'decreto',
-            titulo:             $request->titulo,
-            descripcion:        $request->descripcion,
-            pdf_url:            $request->pdf_url,
-            pdf_nombre:         $request->pdf_nombre,
-            estado:             $request->estado ?? 'borrador',
+            numero: $request->numero,
+            tipo: $request->tipo ?? 'decreto',
+            titulo: $request->titulo,
+            descripcion: $request->descripcion,
+            pdf_url: $request->pdf_url,
+            pdf_nombre: $request->pdf_nombre,
+            estado: $request->estado ?? 'borrador',
             fecha_promulgacion: $request->fecha_promulgacion,
-            anio:               (int) $request->anio,
-            publicado_en_web:   $request->boolean('publicado_en_web', false),
-            publicado_por:      auth()->id(),
+            anio: (int) $request->anio,
+            publicado_en_web: $request->boolean('publicado_en_web', false),
+            publicado_por: auth()->id(),
         ));
 
         return response()->json($dto, 201);
@@ -80,7 +80,7 @@ class DecretoMunicipalController extends Controller
     {
         return response()->json(
             $this->updateHandler->handle(new UpdateDecretoMunicipalCommand(
-                id:   $id,
+                id: $id,
                 data: $request->validated(),
             ))
         );

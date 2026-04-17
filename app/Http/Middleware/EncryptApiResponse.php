@@ -38,7 +38,7 @@ class EncryptApiResponse
         }
 
         $keyBin = hex2bin($keyHex);
-        $iv     = random_bytes(16);
+        $iv = random_bytes(16);
 
         $ciphertext = openssl_encrypt(
             $response->getContent(),
@@ -54,7 +54,7 @@ class EncryptApiResponse
 
         $response->setContent(json_encode([
             'encrypted' => base64_encode($ciphertext),
-            'iv'        => bin2hex($iv),
+            'iv' => bin2hex($iv),
         ]));
 
         $response->headers->set('Content-Type', 'application/json');

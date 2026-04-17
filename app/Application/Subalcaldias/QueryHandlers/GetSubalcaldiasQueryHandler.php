@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Application\Subsenefcos\QueryHandlers;
+namespace App\Application\Subcenefcos\QueryHandlers;
 
-use App\Application\Subsenefcos\Queries\GetSubsenefcosQuery;
-use App\Domain\Subsenefcos\Contracts\SubsenefcoRepositoryInterface;
+use App\Application\Subcenefcos\Queries\GetSubcenefcosQuery;
+use App\Domain\Subcenefcos\Contracts\SubcenefcoRepositoryInterface;
 
-class GetSubsenefcosQueryHandler
+class GetSubcenefcosQueryHandler
 {
-    public function __construct(private readonly SubsenefcoRepositoryInterface $repository) {}
+    public function __construct(private readonly SubcenefcoRepositoryInterface $repository) {}
 
-    public function handle(GetSubsenefcosQuery $query): array
+    public function handle(GetSubcenefcosQuery $query): array
     {
         return $this->repository->paginate($query->pagination, $query->soloActivos);
     }

@@ -10,7 +10,7 @@
 |---|--------|--------|
 | 1 | [Usuarios y Autenticación](#1-módulo-usuarios-y-autenticación) | usuarios, roles, permisos, roles_permisos, usuarios_roles, sesiones |
 | 2 | [Configuración del Sitio](#2-módulo-configuración-del-sitio) | configuracion_sitio, menus, menu_items, banners, redes_sociales |
-| 3 | [Autoridades e Institucional](#3-módulo-autoridades-e-institucional) | secretarias, autoridades, subsenefcos, organigrama |
+| 3 | [Autoridades e Institucional](#3-módulo-autoridades-e-institucional) | secretarias, autoridades, subcenefcos, organigrama |
 | 4 | [Noticias y Comunicados](#4-módulo-noticias-y-comunicados) | categorias_noticia, etiquetas, noticias, comunicados, noticia_etiquetas, multimedia |
 | 5 | [Agenda Institucional](#5-módulo-agenda-institucional) | tipos_evento, eventos |
 | 6 | [Normativa](#6-módulo-normativa) | tipos_norma, normas |
@@ -223,7 +223,7 @@ erDiagram
         timestamptz created_at
     }
 
-    subsenefcos {
+    subcenefcos {
         serial id PK
         varchar(150) nombre
         varchar(200) zona_cobertura
@@ -260,7 +260,7 @@ erDiagram
 |-------|-----------|
 | `secretarias` | Cada Secretaría Municipal o Unidad con sus datos de contacto y atribuciones |
 | `autoridades` | Directorio de todas las autoridades (alcalde, concejales, secretarios, directores) con perfil y foto oficial |
-| `subsenefcos` | Información de las subalcaldías/macrodistritos con geolocalización y trámites disponibles |
+| `subcenefcos` | Información de las subalcaldías/macrodistritos con geolocalización y trámites disponibles |
 | `organigrama` | Estructura jerárquica institucional, permite construir el organigrama interactivo mediante relación padre-hijo |
 
 ---
@@ -838,7 +838,7 @@ erDiagram
     directorio_institucional {
         serial id PK
         int secretaria_id FK "null si es sede central"
-        int subsenefco_id FK "null si no aplica"
+        int subcenefco_id FK "null si no aplica"
         varchar(200) nombre_unidad
         varchar(200) titular
         varchar(200) direccion_fisica
@@ -1177,7 +1177,7 @@ Las siguientes tablas tienen páginas públicas pero carecen del campo `slug`. S
 | Tabla | Tipo | URL resultante |
 | ----- | ---- | -------------- |
 | `secretarias` | `VARCHAR(200) UNIQUE` | `/institucional/secretarias/{slug}` |
-| `subsenefcos` | `VARCHAR(200) UNIQUE` | `/subsenefcos/{slug}` |
+| `subcenefcos` | `VARCHAR(200) UNIQUE` | `/subcenefcos/{slug}` |
 | `eventos` | `VARCHAR(350) UNIQUE` | `/agenda/{slug}` |
 | `normas` | `VARCHAR(450) UNIQUE` | `/normativa/{slug}` |
 | `tipos_norma` | `VARCHAR(100) UNIQUE` | Filtro `/normativa/{slug-tipo}` |
@@ -1190,7 +1190,7 @@ Las siguientes tablas tienen páginas públicas pero carecen del campo `slug`. S
 
 ```sql
 ALTER TABLE secretarias             ADD COLUMN IF NOT EXISTS slug VARCHAR(200) UNIQUE;
-ALTER TABLE subsenefcos            ADD COLUMN IF NOT EXISTS slug VARCHAR(200) UNIQUE;
+ALTER TABLE subcenefcos            ADD COLUMN IF NOT EXISTS slug VARCHAR(200) UNIQUE;
 ALTER TABLE eventos                 ADD COLUMN IF NOT EXISTS slug VARCHAR(350) UNIQUE;
 ALTER TABLE normas                  ADD COLUMN IF NOT EXISTS slug VARCHAR(450) UNIQUE;
 ALTER TABLE tipos_norma             ADD COLUMN IF NOT EXISTS slug VARCHAR(100) UNIQUE;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Subsenefcos\Commands;
+namespace App\Application\Subcenefcos\Commands;
 
-final readonly class CreateSubsenefcoCommand
+final readonly class CreateSubcenefcoCommand
 {
     public function __construct(
         public string $nombre,

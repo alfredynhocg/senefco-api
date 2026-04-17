@@ -38,6 +38,7 @@ class GaleriaController extends Controller
 
         $data = $data->map(function ($g) use ($counts) {
             $g->items_count = (int) ($counts[$g->id] ?? 0);
+
             return $g;
         });
 

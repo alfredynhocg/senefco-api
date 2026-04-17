@@ -13,17 +13,17 @@ class RateLimitPortal
 
     public function handle(Request $request, Closure $next, int $maxAttempts = 60, int $decaySeconds = 60): Response
     {
-        $key = 'portal:' . $request->ip();
+        $key = 'portal:'.$request->ip();
 
         if ($this->limiter->tooManyAttempts($key, $maxAttempts)) {
             $retryAfter = $this->limiter->availableIn($key);
 
             return response()->json([
-                'error'       => 'Demasiadas solicitudes. Intente nuevamente en ' . $retryAfter . ' segundos.',
+                'error' => 'Demasiadas solicitudes. Intente nuevamente en '.$retryAfter.' segundos.',
                 'retry_after' => $retryAfter,
             ], 429)->withHeaders([
-                'Retry-After'           => $retryAfter,
-                'X-RateLimit-Limit'     => $maxAttempts,
+                'Retry-After' => $retryAfter,
+                'X-RateLimit-Limit' => $maxAttempts,
                 'X-RateLimit-Remaining' => 0,
             ]);
         }

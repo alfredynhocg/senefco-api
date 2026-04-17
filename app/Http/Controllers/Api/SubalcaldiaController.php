@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Application\Subsenefcos\Commands\CreateSubsenefcoCommand;
-use App\Application\Subsenefcos\Commands\DeleteSubsenefcoCommand;
-use App\Application\Subsenefcos\Commands\UpdateSubsenefcoCommand;
-use App\Application\Subsenefcos\Handlers\CreateSubsenefcoHandler;
-use App\Application\Subsenefcos\Handlers\DeleteSubsenefcoHandler;
-use App\Application\Subsenefcos\Handlers\UpdateSubsenefcoHandler;
-use App\Application\Subsenefcos\Queries\GetSubsenefcoByIdQuery;
-use App\Application\Subsenefcos\Queries\GetSubsenefcosQuery;
-use App\Application\Subsenefcos\QueryHandlers\GetSubsenefcoByIdQueryHandler;
-use App\Application\Subsenefcos\QueryHandlers\GetSubsenefcosQueryHandler;
+use App\Application\Subcenefcos\Commands\CreateSubcenefcoCommand;
+use App\Application\Subcenefcos\Commands\DeleteSubcenefcoCommand;
+use App\Application\Subcenefcos\Commands\UpdateSubcenefcoCommand;
+use App\Application\Subcenefcos\Handlers\CreateSubcenefcoHandler;
+use App\Application\Subcenefcos\Handlers\DeleteSubcenefcoHandler;
+use App\Application\Subcenefcos\Handlers\UpdateSubcenefcoHandler;
+use App\Application\Subcenefcos\Queries\GetSubcenefcoByIdQuery;
+use App\Application\Subcenefcos\Queries\GetSubcenefcosQuery;
+use App\Application\Subcenefcos\QueryHandlers\GetSubcenefcoByIdQueryHandler;
+use App\Application\Subcenefcos\QueryHandlers\GetSubcenefcosQueryHandler;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Subsenefcos\StoreSubsenefcoRequest;
-use App\Http\Requests\Subsenefcos\UpdateSubsenefcoRequest;
+use App\Http\Requests\Subcenefcos\StoreSubcenefcoRequest;
+use App\Http\Requests\Subcenefcos\UpdateSubcenefcoRequest;
 use App\Shared\Kernel\DTOs\PaginationDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class SubsenefcoController extends Controller
+class SubcenefcoController extends Controller
 {
     public function __construct(
-        private readonly GetSubsenefcosQueryHandler $getSubsenefcosHandler,
-        private readonly GetSubsenefcoByIdQueryHandler $getSubsenefcoByIdHandler,
-        private readonly CreateSubsenefcoHandler $createHandler,
-        private readonly UpdateSubsenefcoHandler $updateHandler,
-        private readonly DeleteSubsenefcoHandler $deleteHandler,
+        private readonly GetSubcenefcosQueryHandler $getSubcenefcosHandler,
+        private readonly GetSubcenefcoByIdQueryHandler $getSubcenefcoByIdHandler,
+        private readonly CreateSubcenefcoHandler $createHandler,
+        private readonly UpdateSubcenefcoHandler $updateHandler,
+        private readonly DeleteSubcenefcoHandler $deleteHandler,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -40,15 +40,15 @@ class SubsenefcoController extends Controller
         ]);
 
         return response()->json(
-            $this->getSubsenefcosHandler->handle(
-                new GetSubsenefcosQuery($pagination, $request->boolean('soloActivos', false))
+            $this->getSubcenefcosHandler->handle(
+                new GetSubcenefcosQuery($pagination, $request->boolean('soloActivos', false))
             )
         );
     }
 
-    public function store(StoreSubsenefcoRequest $request): JsonResponse
+    public function store(StoreSubcenefcoRequest $request): JsonResponse
     {
-        $dto = $this->createHandler->handle(new CreateSubsenefcoCommand(
+        $dto = $this->createHandler->handle(new CreateSubcenefcoCommand(
             nombre: $request->nombre,
             zona_cobertura: $request->zona_cobertura,
             direccion_fisica: $request->direccion_fisica,
@@ -66,17 +66,17 @@ class SubsenefcoController extends Controller
 
     public function show(int $id): JsonResponse
     {
-        return response()->json($this->getSubsenefcoByIdHandler->handle(new GetSubsenefcoByIdQuery($id)));
+        return response()->json($this->getSubcenefcoByIdHandler->handle(new GetSubcenefcoByIdQuery($id)));
     }
 
-    public function update(UpdateSubsenefcoRequest $request, int $id): JsonResponse
+    public function update(UpdateSubcenefcoRequest $request, int $id): JsonResponse
     {
-        return response()->json($this->updateHandler->handle(new UpdateSubsenefcoCommand($id, $request->validated())));
+        return response()->json($this->updateHandler->handle(new UpdateSubcenefcoCommand($id, $request->validated())));
     }
 
     public function destroy(int $id): JsonResponse
     {
-        $this->deleteHandler->handle(new DeleteSubsenefcoCommand($id));
+        $this->deleteHandler->handle(new DeleteSubcenefcoCommand($id));
 
         return response()->json(null, 204);
     }

@@ -14,11 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'permiso'        => \App\Http\Middleware\CheckPermiso::class,
-            'solo.activos'   => \App\Http\Middleware\SoloActivosPortal::class,
-            'rate.portal'    => \App\Http\Middleware\RateLimitPortal::class,
+            'permiso' => \App\Http\Middleware\CheckPermiso::class,
+            'solo.activos' => \App\Http\Middleware\SoloActivosPortal::class,
+            'rate.portal' => \App\Http\Middleware\RateLimitPortal::class,
             'encrypt.portal' => \App\Http\Middleware\EncryptApiResponse::class,
-            'portal.key'     => \App\Http\Middleware\ValidarPortalKey::class,
+            'portal.key' => \App\Http\Middleware\ValidarPortalKey::class,
         ]);
 
         $middleware->redirectGuestsTo(fn ($request) => $request->is('api/*') ? null : '/login');

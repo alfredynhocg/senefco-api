@@ -14,14 +14,14 @@ use App\Infrastructure\WhatsApp\Enums\BotState;
 class WhatsAppBotService
 {
     public function __construct(
-        private readonly WhatsAppService    $wa,
+        private readonly WhatsAppService $wa,
         private readonly ConversationManager $conv,
-        private readonly MenuHandler        $menu,
-        private readonly TramiteHandler     $tramite,
-        private readonly InfoHandler        $info,
-        private readonly SecretariaHandler  $secretaria,
+        private readonly MenuHandler $menu,
+        private readonly TramiteHandler $tramite,
+        private readonly InfoHandler $info,
+        private readonly SecretariaHandler $secretaria,
         private readonly SeguimientoHandler $seguimiento,
-        private readonly AgentService       $agent,
+        private readonly AgentService $agent,
     ) {}
 
     public function handleMessage(string $from, string $type, array $message, ?string $nombre = null): void
@@ -93,43 +93,43 @@ class WhatsAppBotService
     private function dispatchKeyword(string $from, string $intent): void
     {
         match ($intent) {
-            'saludo'      => $this->sendBienvenida($from),
-            'tramites'    => $this->tramite->showLista($from),
-            'noticias'    => $this->info->showNoticias($from),
-            'eventos'     => $this->info->showEventos($from),
+            'saludo' => $this->sendBienvenida($from),
+            'tramites' => $this->tramite->showLista($from),
+            'noticias' => $this->info->showNoticias($from),
+            'eventos' => $this->info->showEventos($from),
             'secretarias' => $this->secretaria->showLista($from),
-            'audiencias'  => $this->info->showAudienciasPublicas($from),
+            'audiencias' => $this->info->showAudienciasPublicas($from),
             'seguimiento' => $this->seguimiento->pedirNumero($from),
-            'horario'     => $this->menu->handleHorario($from),
-            'ubicacion'   => $this->menu->handleUbicacion($from),
-            'soporte'     => $this->menu->handleSoporte($from),
-            default       => $this->menu->handle($from),
+            'horario' => $this->menu->handleHorario($from),
+            'ubicacion' => $this->menu->handleUbicacion($from),
+            'soporte' => $this->menu->handleSoporte($from),
+            default => $this->menu->handle($from),
         };
     }
 
     private function routeByButton(string $from, string $id, array $contexto): void
     {
         match (true) {
-            $id === BotButton::MENU->value               => $this->menu->handle($from),
-            $id === BotButton::TRAMITES->value           => $this->tramite->showLista($from),
-            $id === BotButton::NOTICIAS->value           => $this->info->showNoticias($from),
-            $id === BotButton::COMUNICADOS->value        => $this->info->showComunicados($from),
-            $id === BotButton::EVENTOS->value            => $this->info->showEventos($from),
-            $id === BotButton::SECRETARIAS->value        => $this->secretaria->showLista($from),
-            $id === BotButton::AUTORIDADES->value        => $this->info->showAutoridades($from),
+            $id === BotButton::MENU->value => $this->menu->handle($from),
+            $id === BotButton::TRAMITES->value => $this->tramite->showLista($from),
+            $id === BotButton::NOTICIAS->value => $this->info->showNoticias($from),
+            $id === BotButton::COMUNICADOS->value => $this->info->showComunicados($from),
+            $id === BotButton::EVENTOS->value => $this->info->showEventos($from),
+            $id === BotButton::SECRETARIAS->value => $this->secretaria->showLista($from),
+            $id === BotButton::AUTORIDADES->value => $this->info->showAutoridades($from),
             $id === BotButton::AUDIENCIAS_PUBLICAS->value => $this->info->showAudienciasPublicas($from),
-            $id === BotButton::HORARIO->value            => $this->menu->handleHorario($from),
-            $id === BotButton::UBICACION->value          => $this->menu->handleUbicacion($from),
-            $id === BotButton::SOPORTE->value            => $this->menu->handleSoporte($from),
-            $id === BotButton::SEGUIMIENTO->value        => $this->seguimiento->pedirNumero($from),
+            $id === BotButton::HORARIO->value => $this->menu->handleHorario($from),
+            $id === BotButton::UBICACION->value => $this->menu->handleUbicacion($from),
+            $id === BotButton::SOPORTE->value => $this->menu->handleSoporte($from),
+            $id === BotButton::SEGUIMIENTO->value => $this->seguimiento->pedirNumero($from),
 
-            str_starts_with($id, BotButton::PREFIX_TRAMITE)    => $this->tramite->showDetalle($from, (int) substr($id, strlen(BotButton::PREFIX_TRAMITE))),
-            str_starts_with($id, BotButton::PREFIX_NOTICIA)    => $this->info->showDetalleNoticia($from, (int) substr($id, strlen(BotButton::PREFIX_NOTICIA))),
+            str_starts_with($id, BotButton::PREFIX_TRAMITE) => $this->tramite->showDetalle($from, (int) substr($id, strlen(BotButton::PREFIX_TRAMITE))),
+            str_starts_with($id, BotButton::PREFIX_NOTICIA) => $this->info->showDetalleNoticia($from, (int) substr($id, strlen(BotButton::PREFIX_NOTICIA))),
             str_starts_with($id, BotButton::PREFIX_COMUNICADO) => $this->info->showDetalleComunicado($from, (int) substr($id, strlen(BotButton::PREFIX_COMUNICADO))),
-            str_starts_with($id, BotButton::PREFIX_EVENTO)     => $this->info->showDetalleEvento($from, (int) substr($id, strlen(BotButton::PREFIX_EVENTO))),
+            str_starts_with($id, BotButton::PREFIX_EVENTO) => $this->info->showDetalleEvento($from, (int) substr($id, strlen(BotButton::PREFIX_EVENTO))),
             str_starts_with($id, BotButton::PREFIX_SECRETARIA) => $this->secretaria->showDetalle($from, (int) substr($id, strlen(BotButton::PREFIX_SECRETARIA))),
-            str_starts_with($id, BotButton::PREFIX_AUTORIDAD)  => $this->info->showDetalleAutoridad($from, (int) substr($id, strlen(BotButton::PREFIX_AUTORIDAD))),
-            str_starts_with($id, BotButton::PREFIX_AUDIENCIA)  => $this->info->showDetalleAudiencia($from, (int) substr($id, strlen(BotButton::PREFIX_AUDIENCIA))),
+            str_starts_with($id, BotButton::PREFIX_AUTORIDAD) => $this->info->showDetalleAutoridad($from, (int) substr($id, strlen(BotButton::PREFIX_AUTORIDAD))),
+            str_starts_with($id, BotButton::PREFIX_AUDIENCIA) => $this->info->showDetalleAudiencia($from, (int) substr($id, strlen(BotButton::PREFIX_AUDIENCIA))),
 
             default => $this->menu->handle($from),
         };
@@ -137,11 +137,11 @@ class WhatsAppBotService
 
     public function sendBienvenida(string $from): void
     {
-        $senefco = config('bot.senefco.nombre');
+        $cenefco = config('bot.cenefco.nombre');
         $conv = $this->conv->getOrCreate($from);
         $saludo = $conv->nombre ? "¡Hola, *{$conv->nombre}*!" : '¡Hola!';
 
-        $this->wa->sendText($from, "👋 {$saludo} Bienvenido/a al chatbot de *{$senefco}*.\n\nEstoy aquí para ayudarte con información sobre trámites, noticias, eventos y más.");
+        $this->wa->sendText($from, "👋 {$saludo} Bienvenido/a al chatbot de *{$cenefco}*.\n\nEstoy aquí para ayudarte con información sobre trámites, noticias, eventos y más.");
         $this->menu->handle($from);
     }
 

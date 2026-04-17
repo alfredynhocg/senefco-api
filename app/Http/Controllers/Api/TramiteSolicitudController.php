@@ -27,12 +27,12 @@ class TramiteSolicitudController extends Controller
     public function storeEtapa(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'tramite_id'            => 'required|integer|exists:tramites_catalogo,id',
-            'nombre'                => 'required|string|max:150',
-            'descripcion'           => 'nullable|string',
+            'tramite_id' => 'required|integer|exists:tramites_catalogo,id',
+            'nombre' => 'required|string|max:150',
+            'descripcion' => 'nullable|string',
             'instruccion_ciudadano' => 'nullable|string',
-            'orden'                 => 'required|integer|min:1',
-            'es_final'              => 'boolean',
+            'orden' => 'required|integer|min:1',
+            'es_final' => 'boolean',
         ]);
 
         $etapa = TramiteEtapa::create($validated);
@@ -45,11 +45,11 @@ class TramiteSolicitudController extends Controller
         $etapa = TramiteEtapa::findOrFail($id);
 
         $validated = $request->validate([
-            'nombre'                => 'sometimes|string|max:150',
-            'descripcion'           => 'nullable|string',
+            'nombre' => 'sometimes|string|max:150',
+            'descripcion' => 'nullable|string',
             'instruccion_ciudadano' => 'nullable|string',
-            'orden'                 => 'sometimes|integer|min:1',
-            'es_final'              => 'boolean',
+            'orden' => 'sometimes|integer|min:1',
+            'es_final' => 'boolean',
         ]);
 
         $etapa->update($validated);
@@ -189,10 +189,10 @@ class TramiteSolicitudController extends Controller
     public function storeSolicitudPortal(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'tramite_id'      => 'required|integer|exists:tramites_catalogo,id',
-            'nombre_ciudadano'=> 'required|string|max:200',
-            'ci'              => 'nullable|string|max:20',
-            'phone'           => 'required|string|max:30',
+            'tramite_id' => 'required|integer|exists:tramites_catalogo,id',
+            'nombre_ciudadano' => 'required|string|max:200',
+            'ci' => 'nullable|string|max:20',
+            'phone' => 'required|string|max:30',
         ]);
 
         $tieneEtapas = TramiteEtapa::where('tramite_id', $validated['tramite_id'])->exists();
@@ -201,12 +201,12 @@ class TramiteSolicitudController extends Controller
         }
 
         $solicitud = TramiteSolicitud::create([
-            'tramite_id'       => $validated['tramite_id'],
+            'tramite_id' => $validated['tramite_id'],
             'nombre_ciudadano' => $validated['nombre_ciudadano'],
-            'ci'               => $validated['ci'] ?? null,
-            'phone'            => $validated['phone'],
-            'etapa_actual'     => 1,
-            'estado'           => 'en_proceso',
+            'ci' => $validated['ci'] ?? null,
+            'phone' => $validated['phone'],
+            'etapa_actual' => 1,
+            'estado' => 'en_proceso',
         ]);
 
         $primeraEtapa = TramiteEtapa::where('tramite_id', $validated['tramite_id'])
@@ -216,9 +216,9 @@ class TramiteSolicitudController extends Controller
         if ($primeraEtapa) {
             TramiteSolicitudHistorial::create([
                 'solicitud_id' => $solicitud->id,
-                'etapa_orden'  => $primeraEtapa->orden,
+                'etapa_orden' => $primeraEtapa->orden,
                 'etapa_nombre' => $primeraEtapa->nombre,
-                'observacion'  => 'Solicitud registrada vía portal web.',
+                'observacion' => 'Solicitud registrada vía portal web.',
             ]);
         }
 
@@ -226,13 +226,13 @@ class TramiteSolicitudController extends Controller
 
         return response()->json([
             'numero_seguimiento' => $solicitud->numero_seguimiento,
-            'tramite_id'         => $solicitud->tramite_id,
-            'nombre_ciudadano'   => $solicitud->nombre_ciudadano,
-            'ci'                 => $solicitud->ci,
-            'phone'              => $solicitud->phone,
-            'estado'             => $solicitud->estado,
-            'etapa_actual'       => $solicitud->etapa_actual,
-            'created_at'         => $solicitud->created_at?->toIso8601String(),
+            'tramite_id' => $solicitud->tramite_id,
+            'nombre_ciudadano' => $solicitud->nombre_ciudadano,
+            'ci' => $solicitud->ci,
+            'phone' => $solicitud->phone,
+            'estado' => $solicitud->estado,
+            'etapa_actual' => $solicitud->etapa_actual,
+            'created_at' => $solicitud->created_at?->toIso8601String(),
         ], 201);
     }
 
@@ -282,13 +282,13 @@ class TramiteSolicitudController extends Controller
     private function formatEtapa(TramiteEtapa $e): array
     {
         return [
-            'id'                    => $e->id,
-            'tramite_id'            => $e->tramite_id,
-            'nombre'                => $e->nombre,
-            'descripcion'           => $e->descripcion,
+            'id' => $e->id,
+            'tramite_id' => $e->tramite_id,
+            'nombre' => $e->nombre,
+            'descripcion' => $e->descripcion,
             'instruccion_ciudadano' => $e->instruccion_ciudadano,
-            'orden'                 => $e->orden,
-            'es_final'              => $e->es_final,
+            'orden' => $e->orden,
+            'es_final' => $e->es_final,
         ];
     }
 

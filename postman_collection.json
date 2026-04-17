@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "api-senefco-complete-v2",
-    "name": "API SENEFCO - Colección Completa v2",
+    "_postman_id": "api-cenefco-complete-v2",
+    "name": "API cenefco - Colección Completa v2",
     "description": "Colección completa ajustada a las migraciones y rutas reales (api.php + routes/api/v1.php). Todos los campos corresponden exactamente a los de la base de datos.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -105,7 +105,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"admin@senefco.gob.bo\",\n    \"password\": \"password\"\n}"
+              "raw": "{\n    \"email\": \"admin@cenefco.gob.bo\",\n    \"password\": \"password\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/login",
@@ -177,7 +177,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"nombre\": \"Carlos\",\n    \"apellido\": \"Mamani\",\n    \"email\": \"carlos@senefco.gob.bo\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"tipo\": \"funcionario\"\n}"
+              "raw": "{\n    \"nombre\": \"Carlos\",\n    \"apellido\": \"Mamani\",\n    \"email\": \"carlos@cenefco.gob.bo\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"tipo\": \"funcionario\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/register",
@@ -243,7 +243,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"admin@senefco.gob.bo\"\n}"
+              "raw": "{\n    \"email\": \"admin@cenefco.gob.bo\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/forgot-password",
@@ -273,7 +273,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"admin@senefco.gob.bo\",\n    \"token\": \"TOKEN_DEL_EMAIL\",\n    \"password\": \"nueva-password\",\n    \"password_confirmation\": \"nueva-password\"\n}"
+              "raw": "{\n    \"email\": \"admin@cenefco.gob.bo\",\n    \"token\": \"TOKEN_DEL_EMAIL\",\n    \"password\": \"nueva-password\",\n    \"password_confirmation\": \"nueva-password\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/reset-password",
@@ -1066,7 +1066,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"plataforma\": \"Facebook\",\n    \"url\": \"https://facebook.com/senefco\",\n    \"activo\": true\n}"
+                  "raw": "{\n    \"plataforma\": \"Facebook\",\n    \"url\": \"https://facebook.com/cenefco\",\n    \"activo\": true\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/redes-sociales",
@@ -1112,7 +1112,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"plataforma\": \"Facebook\",\n    \"url\": \"https://facebook.com/senefco\",\n    \"activo\": true\n}"
+                  "raw": "{\n    \"plataforma\": \"Facebook\",\n    \"url\": \"https://facebook.com/cenefco\",\n    \"activo\": true\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/redes-sociales/1",
@@ -1367,7 +1367,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"nombre\": \"Secretaría Municipal de Salud\",\n    \"sigla\": \"SMS\",\n    \"atribuciones\": \"Gestión de la salud pública municipal\",\n    \"direccion_fisica\": \"Av. Principal #100\",\n    \"telefono\": \"4-4444444\",\n    \"email\": \"salud@senefco.gob.bo\",\n    \"horario_atencion\": \"Lunes a Viernes 08:00 - 16:00\",\n    \"orden_organigrama\": 1,\n    \"activa\": true\n}"
+                  "raw": "{\n    \"nombre\": \"Secretaría Municipal de Salud\",\n    \"sigla\": \"SMS\",\n    \"atribuciones\": \"Gestión de la salud pública municipal\",\n    \"direccion_fisica\": \"Av. Principal #100\",\n    \"telefono\": \"4-4444444\",\n    \"email\": \"salud@cenefco.gob.bo\",\n    \"horario_atencion\": \"Lunes a Viernes 08:00 - 16:00\",\n    \"orden_organigrama\": 1,\n    \"activa\": true\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/secretarias",
@@ -1440,14 +1440,14 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/senefco_api/v1",
+                  "raw": "{{baseUrl}}/api/v1/cenefco_api/v1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
                     "api",
                     "v1",
-                    "senefco"
+                    "cenefco"
                   ]
                 }
               }
@@ -1458,14 +1458,14 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/senefco/1",
+                  "raw": "{{baseUrl}}/api/v1/cenefco/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
                     "api",
                     "v1",
-                    "senefco",
+                    "cenefco",
                     "1"
                   ]
                 }
@@ -1486,14 +1486,14 @@
                   "raw": "{\n    \"nombre\": \"Subalcaldía Zona Norte\",\n    \"sigla\": \"SZN\",\n    \"direccion\": \"Av. Norte #200\",\n    \"telefono\": \"4-1111111\",\n    \"activa\": true\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/senefco",
+                  "raw": "{{baseUrl}}/api/v1/cenefco",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
                     "api",
                     "v1",
-                    "senefco"
+                    "cenefco"
                   ]
                 }
               }
@@ -1513,14 +1513,14 @@
                   "raw": "{\n    \"nombre\": \"Subalcaldía Zona Norte Actualizada\"\n}"
                 },
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/senefco/1",
+                  "raw": "{{baseUrl}}/api/v1/cenefco/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
                     "api",
                     "v1",
-                    "senefco",
+                    "cenefco",
                     "1"
                   ]
                 }
@@ -1532,14 +1532,14 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/senefco/1",
+                  "raw": "{{baseUrl}}/api/v1/cenefco/1",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
                     "api",
                     "v1",
-                    "senefco",
+                    "cenefco",
                     "1"
                   ]
                 }
@@ -1696,7 +1696,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"secretaria_id\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Pérez\",\n    \"cargo\": \"Secretario Municipal de Salud\",\n    \"tipo\": \"secretario\",\n    \"perfil_profesional\": \"Médico con 20 años de experiencia\",\n    \"email_institucional\": \"jperez@senefco.gob.bo\",\n    \"orden\": 1,\n    \"activo\": true,\n    \"fecha_inicio_cargo\": \"2025-01-15\"\n}"
+                  "raw": "{\n    \"secretaria_id\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Pérez\",\n    \"cargo\": \"Secretario Municipal de Salud\",\n    \"tipo\": \"secretario\",\n    \"perfil_profesional\": \"Médico con 20 años de experiencia\",\n    \"email_institucional\": \"jperez@cenefco.gob.bo\",\n    \"orden\": 1,\n    \"activo\": true,\n    \"fecha_inicio_cargo\": \"2025-01-15\"\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/autoridades",
@@ -1742,7 +1742,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"secretaria_id\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Pérez\",\n    \"cargo\": \"Secretario Municipal de Salud (Encargado)\",\n    \"tipo\": \"secretario\",\n    \"perfil_profesional\": \"Médico con 20 años de experiencia\",\n    \"email_institucional\": \"jperez@senefco.gob.bo\",\n    \"foto_url\": null,\n    \"orden\": 1,\n    \"activo\": true,\n    \"fecha_inicio_cargo\": \"2025-01-15\",\n    \"fecha_fin_cargo\": null\n}"
+                  "raw": "{\n    \"secretaria_id\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Pérez\",\n    \"cargo\": \"Secretario Municipal de Salud (Encargado)\",\n    \"tipo\": \"secretario\",\n    \"perfil_profesional\": \"Médico con 20 años de experiencia\",\n    \"email_institucional\": \"jperez@cenefco.gob.bo\",\n    \"foto_url\": null,\n    \"orden\": 1,\n    \"activo\": true,\n    \"fecha_inicio_cargo\": \"2025-01-15\",\n    \"fecha_fin_cargo\": null\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/autoridades/1",
@@ -2053,7 +2053,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"tramite_id\": 3,\n    \"nombre\": \"Formulario de Solicitud\",\n    \"archivo_url\": \"https://senefco.gob.bo/formularios/solicitud.pdf\",\n    \"formato\": \"PDF\",\n    \"fecha_actualizacion\": \"2026-01-01\",\n    \"activo\": true\n}"
+              "raw": "{\n    \"tramite_id\": 3,\n    \"nombre\": \"Formulario de Solicitud\",\n    \"archivo_url\": \"https://cenefco.gob.bo/formularios/solicitud.pdf\",\n    \"formato\": \"PDF\",\n    \"fecha_actualizacion\": \"2026-01-01\",\n    \"activo\": true\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/formularios-tramite",
@@ -2527,7 +2527,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"nombre\": \"Central de Emergencias\",\n    \"telefono\": \"110\",\n    \"email\": \"emergencias@senefco.gob.bo\",\n    \"horario\": \"24 horas\",\n    \"activo\": true\n}"
+              "raw": "{\n    \"nombre\": \"Central de Emergencias\",\n    \"telefono\": \"110\",\n    \"email\": \"emergencias@cenefco.gob.bo\",\n    \"horario\": \"24 horas\",\n    \"activo\": true\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/contactos-senafco",
@@ -2642,7 +2642,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"titulo\": \"Banner Principal\",\n    \"imagen_url\": \"https://ejemplo.com/banner.jpg\",\n    \"url_destino\": \"https://senefco.gob.bo/noticias\",\n    \"orden\": 1,\n    \"activo\": true\n}"
+              "raw": "{\n    \"titulo\": \"Banner Principal\",\n    \"imagen_url\": \"https://ejemplo.com/banner.jpg\",\n    \"url_destino\": \"https://cenefco.gob.bo/noticias\",\n    \"orden\": 1,\n    \"activo\": true\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/banners-portal",

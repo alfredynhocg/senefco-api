@@ -22,7 +22,7 @@ use OpenApi\Attributes as OA;
     properties: [
         new OA\Property(property: 'site_name', type: 'string', example: 'Alcaldía Municipal'),
         new OA\Property(property: 'site_active', type: 'boolean', example: true),
-        new OA\Property(property: 'contact_email', type: 'string', example: 'info@senefco.gob.bo'),
+        new OA\Property(property: 'contact_email', type: 'string', example: 'info@cenefco.gob.bo'),
         new OA\Property(property: 'items_per_page', type: 'integer', example: 10),
         new OA\Property(property: 'maintenance_mode', type: 'boolean', example: false),
         new OA\Property(property: 'site_logo', type: 'string', nullable: true),

@@ -161,7 +161,7 @@ MODULOS = [
                 ("search_vector",         "tsvector",     ""),
                 ("created_at",            "timestamptz",  ""),
             ]),
-            ("subsenefcos", [
+            ("subcenefcos", [
                 ("id",                  "serial",       "PK"),
                 ("nombre",              "varchar(150)", ""),
                 ("slug",                "varchar(200)", "UK"),
@@ -619,7 +619,7 @@ MODULOS = [
             ("directorio_institucional", [
                 ("id",                  "serial",       "PK"),
                 ("secretaria_id",       "int",          "FK"),
-                ("subsenefco_id",      "int",          "FK"),
+                ("subcenefco_id",      "int",          "FK"),
                 ("nombre_unidad",       "varchar(200)", ""),
                 ("titular",             "varchar(200)", ""),
                 ("direccion_fisica",    "varchar(200)", ""),
@@ -880,7 +880,7 @@ RELACIONES = [
 
     # ── Módulo 12: Contacto y Directorio ─────────────────────────────────────
     ("secretarias",           "directorio_institucional",    "1N", "tiene"),
-    ("subsenefcos",          "directorio_institucional",    "1N", "tiene"),
+    ("subcenefcos",          "directorio_institucional",    "1N", "tiene"),
     ("secretarias",           "mensajes_contacto",           "1N", "recibe"),
 
     # ── Módulo 14: Recursos Humanos ──────────────────────────────────────────
@@ -1120,7 +1120,7 @@ def main():
     root = build_drawio()
     tree = ET.ElementTree(root)
     ET.indent(tree, space="  ")
-    out = "/home/alfredynho/Downloads/achocalla/Current-Angular_v1.0/docs/senefco_bd.drawio"
+    out = "/home/alfredynho/Downloads/achocalla/Current-Angular_v1.0/docs/cenefco_bd.drawio"
     tree.write(out, encoding="utf-8", xml_declaration=True)
     print(f"✅ Archivo generado: {out}")
 

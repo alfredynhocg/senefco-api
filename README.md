@@ -1,4 +1,4 @@
-# SENEFCO API
+# cenefco API
 
 API REST para la gestión de cursos, diplomados y programas de formación continua. Centraliza la administración de estudiantes, inscripciones, notas, pagos, docentes y la estructura académica de los programas.
 
@@ -71,7 +71,7 @@ app/
 ```bash
 # 1. Clonar e instalar dependencias
 git clone <repo>
-cd senefco_api
+cd cenefco_api
 composer install
 
 # 2. Configurar entorno
@@ -82,7 +82,7 @@ php artisan key:generate
 # DB_CONNECTION=mysql
 # DB_HOST=localhost
 # DB_PORT=3306
-# DB_DATABASE=senefco
+# DB_DATABASE=cenefco
 # DB_USERNAME=<usuario>
 # DB_PASSWORD=<contraseña>
 
@@ -198,17 +198,17 @@ Route::get('/usuarios', [UserController::class, 'index'])
 
 ---
 
-## Base de datos SENEFCO (legado SIASEC)
+## Base de datos cenefco (legado SIASEC)
 
 El proyecto incluye **145 migraciones Laravel** generadas a partir del backup `disereco_siasec_backup.sql` del sistema legado SIASEC. Estas migraciones permiten recrear el esquema completo en cualquier entorno.
 
 ### Convención de nombres
 
 ```text
-2026_04_14_NNNNNN_create_senefco_{tabla}_table.php
+2026_04_14_NNNNNN_create_cenefco_{tabla}_table.php
 ```
 
-Todas están en `database/migrations/` con el prefijo `senefco_` en el nombre del archivo (no en el nombre de la tabla — la tabla conserva el nombre original, ej. `t_usuario`).
+Todas están en `database/migrations/` con el prefijo `cenefco_` en el nombre del archivo (no en el nombre de la tabla — la tabla conserva el nombre original, ej. `t_usuario`).
 
 ### Grupos de tablas
 
@@ -229,14 +229,14 @@ Todas están en `database/migrations/` con el prefijo `senefco_` en el nombre de
 - **Claves primarias compuestas** — varias tablas usan `$table->primary([...])` con múltiples columnas
 - **Sin `bigIncrements`** — los IDs son `integer` simples, no auto-incrementales en todas las tablas
 
-### Ejecutar las migraciones SENEFCO
+### Ejecutar las migraciones cenefco
 
 ```bash
-# Aplicar solo las migraciones SENEFCO (si están en un estado pendiente)
+# Aplicar solo las migraciones cenefco (si están en un estado pendiente)
 php artisan migrate --path=database/migrations
 
 # Ver estado de todas las migraciones
-php artisan migrate:status | grep senefco
+php artisan migrate:status | grep cenefco
 
 # Recrear BD completa desde cero
 php artisan migrate:fresh
@@ -290,14 +290,14 @@ php artisan migrate:status
 ### Variables de entorno requeridas
 
 ```env
-APP_NAME="SENEFCO API"
+APP_NAME="cenefco API"
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://api.senefco.gob.bo
+APP_URL=https://api.cenefco.gob.bo
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_DATABASE=senefco
+DB_DATABASE=cenefco
 DB_USERNAME=<usuario>
 DB_PASSWORD=<password-seguro>
 
@@ -307,8 +307,8 @@ SESSION_DRIVER=database
 
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.proveedor.com
-MAIL_FROM_ADDRESS=noreply@senefco.gob.bo
-MAIL_FROM_NAME="SENEFCO"
+MAIL_FROM_ADDRESS=noreply@cenefco.gob.bo
+MAIL_FROM_NAME="cenefco"
 ```
 
 ### Checklist de producción

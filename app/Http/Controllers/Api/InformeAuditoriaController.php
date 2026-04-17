@@ -33,9 +33,9 @@ class InformeAuditoriaController extends Controller
     {
         $pagination = PaginationDTO::fromArray([
             'pageIndex' => $request->get('pageIndex', 1),
-            'pageSize'  => $request->get('pageSize', 15),
-            'query'     => $request->get('query', ''),
-            'sortKey'   => $request->input('sort.key', 'created_at'),
+            'pageSize' => $request->get('pageSize', 15),
+            'query' => $request->get('query', ''),
+            'sortKey' => $request->input('sort.key', 'created_at'),
             'sortOrder' => $request->input('sort.order', 'desc'),
         ]);
 
@@ -59,15 +59,15 @@ class InformeAuditoriaController extends Controller
     public function store(StoreInformeAuditoriaRequest $request): JsonResponse
     {
         $dto = $this->createHandler->handle(new CreateInformeAuditoriaCommand(
-            nombre:           $request->nombre,
-            descripcion:      $request->descripcion,
-            pdf_url:          $request->pdf_url,
-            pdf_nombre:       $request->pdf_nombre,
-            estado:           $request->estado ?? 'borrador',
-            fecha:            $request->fecha,
-            anio:             (int) $request->anio,
+            nombre: $request->nombre,
+            descripcion: $request->descripcion,
+            pdf_url: $request->pdf_url,
+            pdf_nombre: $request->pdf_nombre,
+            estado: $request->estado ?? 'borrador',
+            fecha: $request->fecha,
+            anio: (int) $request->anio,
             publicado_en_web: $request->boolean('publicado_en_web', false),
-            publicado_por:    auth()->id(),
+            publicado_por: auth()->id(),
         ));
 
         return response()->json($dto, 201);
@@ -77,7 +77,7 @@ class InformeAuditoriaController extends Controller
     {
         return response()->json(
             $this->updateHandler->handle(new UpdateInformeAuditoriaCommand(
-                id:   $id,
+                id: $id,
                 data: $request->validated(),
             ))
         );

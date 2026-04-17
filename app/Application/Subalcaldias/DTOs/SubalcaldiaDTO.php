@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Subsenefcos\DTOs;
+namespace App\Application\Subcenefcos\DTOs;
 
-final readonly class SubsenefcoDTO
+final readonly class SubcenefcoDTO
 {
     public function __construct(
         public int $id,

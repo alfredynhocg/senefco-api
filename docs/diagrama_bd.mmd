@@ -114,7 +114,7 @@ erDiagram
         varchar slug UK
         boolean activo
     }
-    subsenefcos {
+    subcenefcos {
         serial id PK
         varchar nombre
         varchar slug UK
@@ -499,7 +499,7 @@ erDiagram
     directorio_institucional {
         serial id PK
         int secretaria_id FK
-        int subsenefco_id FK
+        int subcenefco_id FK
         varchar nombre_unidad
         varchar telefono_principal
         float latitud
@@ -516,7 +516,7 @@ erDiagram
     }
 
     secretarias ||--o{ directorio_institucional : "tiene entrada"
-    subsenefcos ||--o{ directorio_institucional : "tiene entrada"
+    subcenefcos ||--o{ directorio_institucional : "tiene entrada"
     secretarias ||--o{ mensajes_contacto : "recibe"
 
     %% ══════════════════════════════════════════════════════════════

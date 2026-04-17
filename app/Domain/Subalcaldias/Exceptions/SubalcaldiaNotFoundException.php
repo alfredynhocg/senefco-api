@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Subsenefcos\Exceptions;
+namespace App\Domain\Subcenefcos\Exceptions;
 
 use RuntimeException;
 
-class SubsenefcoNotFoundException extends RuntimeException
+class SubcenefcoNotFoundException extends RuntimeException
 {
     public function __construct(int|string $id)
     {

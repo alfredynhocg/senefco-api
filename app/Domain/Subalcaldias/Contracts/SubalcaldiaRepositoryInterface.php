@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Subsenefcos\Contracts;
+namespace App\Domain\Subcenefcos\Contracts;
 
 use App\Shared\Kernel\DTOs\PaginationDTO;
 
-interface SubsenefcoRepositoryInterface
+interface SubcenefcoRepositoryInterface
 {
     public function paginate(PaginationDTO $pagination, bool $soloActivos = false): array;
 

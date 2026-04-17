@@ -26,7 +26,7 @@ class EloquentInformeAuditoriaRepository implements InformeAuditoriaRepositoryIn
             ->paginate($pagination->pageSize, ['*'], 'page', $pagination->pageIndex);
 
         return [
-            'data'  => collect($paginated->items())->map(fn ($m) => InformeAuditoriaDTO::fromModel($m))->all(),
+            'data' => collect($paginated->items())->map(fn ($m) => InformeAuditoriaDTO::fromModel($m))->all(),
             'total' => $paginated->total(),
         ];
     }

@@ -11,7 +11,7 @@ class GaleriaItemController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $galeriaId  = $request->get('galeria_id');
+        $galeriaId = $request->get('galeria_id');
         $soloActivos = $request->boolean('soloActivos', false);
         $size = (int) $request->get('pageSize', 50);
         $page = (int) $request->get('pageIndex', 1);
@@ -29,7 +29,7 @@ class GaleriaItemController extends Controller
         }
 
         $total = $q->count();
-        $data  = $q->orderBy('galeria_items.orden')->orderBy('galeria_items.id')
+        $data = $q->orderBy('galeria_items.orden')->orderBy('galeria_items.id')
             ->offset(($page - 1) * $size)->limit($size)->get();
 
         return response()->json(['data' => $data, 'total' => $total]);

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Subsenefcos\Commands;
+namespace App\Application\Subcenefcos\Commands;
 
-final readonly class DeleteSubsenefcoCommand
+final readonly class DeleteSubcenefcoCommand
 {
     public function __construct(public int $id) {}
 }

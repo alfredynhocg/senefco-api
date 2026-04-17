@@ -167,8 +167,8 @@ class AgentService
 
     private function buildContext(): string
     {
-        $nombre = config('bot.senefco.nombre');
-        $sigla = config('bot.senefco.sigla');
+        $nombre = config('bot.cenefco.nombre');
+        $sigla = config('bot.cenefco.sigla');
 
         $tramites = Tramite::where('activo', true)
             ->orderBy('nombre')
@@ -211,12 +211,12 @@ class AgentService
             )
             ->implode("\n");
 
-        $horarios = collect(config('bot.senefco.horarios'))
+        $horarios = collect(config('bot.cenefco.horarios'))
             ->map(fn ($h, $d) => "{$d}: {$h}")
             ->implode(', ');
 
-        $contacto = config('bot.senefco.contacto');
-        $ubicacion = config('bot.senefco.ubicacion');
+        $contacto = config('bot.cenefco.contacto');
+        $ubicacion = config('bot.cenefco.ubicacion');
 
         return <<<CONTEXT
                 INSTITUCIÓN: {$nombre} ({$sigla})
@@ -242,7 +242,7 @@ class AgentService
 
     private function buildSystemPrompt(string $contexto): string
     {
-        $nombre = config('bot.senefco.nombre');
+        $nombre = config('bot.cenefco.nombre');
 
         return <<<SYSTEM
                 Eres el asistente virtual oficial de la {$nombre}. Respondes preguntas de ciudadanos por WhatsApp.

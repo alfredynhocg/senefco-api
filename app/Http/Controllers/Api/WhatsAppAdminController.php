@@ -154,19 +154,19 @@ class WhatsAppAdminController extends Controller
     public function enviarMedia(Request $request): JsonResponse
     {
         $request->validate([
-            'phones'   => 'required|array|min:1',
+            'phones' => 'required|array|min:1',
             'phones.*' => 'required|string',
-            'tipo'     => 'required|in:image,document',
-            'archivo'  => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'caption'  => 'nullable|string|max:1024',
+            'tipo' => 'required|in:image,document',
+            'archivo' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',
+            'caption' => 'nullable|string|max:1024',
             'filename' => 'nullable|string|max:255',
         ]);
 
         $service = new WhatsAppService;
 
         try {
-            $path    = $request->file('archivo')->getRealPath();
-            $upload  = $service->uploadMedia($path);
+            $path = $request->file('archivo')->getRealPath();
+            $upload = $service->uploadMedia($path);
             $mediaId = $upload['id'] ?? null;
         } catch (\Throwable $e) {
             return response()->json(['message' => 'Error al subir el archivo: '.$e->getMessage()], 500);
@@ -178,7 +178,7 @@ class WhatsAppAdminController extends Controller
 
         $exitosos = 0;
         $detalleFallidos = [];
-        $caption  = $request->get('caption', '');
+        $caption = $request->get('caption', '');
         $filename = $request->get('filename', $request->file('archivo')->getClientOriginalName());
 
         foreach ($request->phones as $phone) {
@@ -195,8 +195,8 @@ class WhatsAppAdminController extends Controller
         }
 
         return response()->json([
-            'exitosos'         => $exitosos,
-            'fallidos'         => count($detalleFallidos),
+            'exitosos' => $exitosos,
+            'fallidos' => count($detalleFallidos),
             'detalle_fallidos' => $detalleFallidos,
         ]);
     }
@@ -214,12 +214,12 @@ class WhatsAppAdminController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:80|unique:whatsapp_etiquetas,nombre',
-            'color'  => 'nullable|string|regex:/^#[0-9a-fA-F]{6}$/',
+            'color' => 'nullable|string|regex:/^#[0-9a-fA-F]{6}$/',
         ]);
 
         $etiqueta = WhatsappEtiqueta::create([
             'nombre' => $request->nombre,
-            'color'  => $request->get('color', '#6366f1'),
+            'color' => $request->get('color', '#6366f1'),
         ]);
 
         return response()->json($etiqueta, 201);
@@ -231,12 +231,12 @@ class WhatsAppAdminController extends Controller
 
         $request->validate([
             'nombre' => "required|string|max:80|unique:whatsapp_etiquetas,nombre,{$id}",
-            'color'  => 'nullable|string|regex:/^#[0-9a-fA-F]{6}$/',
+            'color' => 'nullable|string|regex:/^#[0-9a-fA-F]{6}$/',
         ]);
 
         $etiqueta->update([
             'nombre' => $request->nombre,
-            'color'  => $request->get('color', $etiqueta->color),
+            'color' => $request->get('color', $etiqueta->color),
         ]);
 
         return response()->json($etiqueta);
@@ -254,7 +254,7 @@ class WhatsAppAdminController extends Controller
         $conv = WhatsappConversacion::findOrFail($id);
 
         $request->validate([
-            'etiqueta_ids'   => 'required|array',
+            'etiqueta_ids' => 'required|array',
             'etiqueta_ids.*' => 'integer|exists:whatsapp_etiquetas,id',
         ]);
 

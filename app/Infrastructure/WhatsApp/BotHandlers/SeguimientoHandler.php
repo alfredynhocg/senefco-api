@@ -3,10 +3,8 @@
 namespace App\Infrastructure\WhatsApp\BotHandlers;
 
 use App\Infrastructure\Shared\Services\WhatsAppService;
-use App\Infrastructure\TramitesCatalogo\Models\Tramite;
 use App\Infrastructure\TramiteSolicitudes\Models\TramiteEtapa;
 use App\Infrastructure\TramiteSolicitudes\Models\TramiteSolicitud;
-use App\Infrastructure\TramiteSolicitudes\Models\TramiteSolicitudHistorial;
 use App\Infrastructure\WhatsApp\ConversationManager;
 use App\Infrastructure\WhatsApp\Enums\BotButton;
 use App\Infrastructure\WhatsApp\Enums\BotState;
@@ -84,14 +82,14 @@ class SeguimientoHandler
 
         $estadoLabel = match ($solicitud->estado) {
             'completado' => '✅ Completado',
-            'cancelado'  => '❌ Cancelado',
-            default      => '🔄 En proceso',
+            'cancelado' => '❌ Cancelado',
+            default => '🔄 En proceso',
         };
 
         $progreso = $totalEtapas > 0 ? round(($etapaActual / $totalEtapas) * 100) : 0;
-        $barra    = $this->barraProgreso($etapaActual, $totalEtapas);
+        $barra = $this->barraProgreso($etapaActual, $totalEtapas);
 
-        $texto  = "📋 *Estado de tu Trámite*\n\n";
+        $texto = "📋 *Estado de tu Trámite*\n\n";
         $texto .= "📌 *Número:* {$solicitud->numero_seguimiento}\n";
         $texto .= "📝 *Trámite:* {$solicitud->tramite->nombre}\n";
         $texto .= "👤 *Solicitante:* {$solicitud->nombre_ciudadano}\n";

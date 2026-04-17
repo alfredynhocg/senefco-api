@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Application\Subsenefcos\QueryHandlers;
+namespace App\Application\Subcenefcos\QueryHandlers;
 
-use App\Application\Subsenefcos\DTOs\SubsenefcoDTO;
-use App\Application\Subsenefcos\Queries\GetSubsenefcoByIdQuery;
-use App\Domain\Subsenefcos\Contracts\SubsenefcoRepositoryInterface;
+use App\Application\Subcenefcos\DTOs\SubcenefcoDTO;
+use App\Application\Subcenefcos\Queries\GetSubcenefcoByIdQuery;
+use App\Domain\Subcenefcos\Contracts\SubcenefcoRepositoryInterface;
 
-class GetSubsenefcoByIdQueryHandler
+class GetSubcenefcoByIdQueryHandler
 {
-    public function __construct(private readonly SubsenefcoRepositoryInterface $repository) {}
+    public function __construct(private readonly SubcenefcoRepositoryInterface $repository) {}
 
-    public function handle(GetSubsenefcoByIdQuery $query): SubsenefcoDTO
+    public function handle(GetSubcenefcoByIdQuery $query): SubcenefcoDTO
     {
         return $this->repository->findById($query->id);
     }

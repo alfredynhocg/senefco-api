@@ -10,7 +10,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: 'tipo', type: 'string', enum: ['noticia', 'comunicado', 'norma', 'tramite', 'evento', 'documento_transparencia'], example: 'noticia'),
         new OA\Property(property: 'id', type: 'integer', example: 1),
         new OA\Property(property: 'titulo', type: 'string', example: 'Alcaldía inaugura nueva ciclovía'),
-        new OA\Property(property: 'slug', type: 'string', example: 'senefco-inaugura-nueva-ciclovia'),
+        new OA\Property(property: 'slug', type: 'string', example: 'cenefco-inaugura-nueva-ciclovia'),
         new OA\Property(property: 'estado', type: 'string', example: 'publicado'),
         new OA\Property(property: 'fecha', type: 'string', format: 'date-time', nullable: true),
     ]

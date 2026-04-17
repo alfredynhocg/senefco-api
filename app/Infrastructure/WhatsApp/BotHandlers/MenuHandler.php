@@ -16,7 +16,7 @@ class MenuHandler
 
     public function handle(string $from): void
     {
-        $nombre = config('bot.senefco.nombre');
+        $nombre = config('bot.cenefco.nombre');
 
         $this->wa->sendList(
             $from,
@@ -58,8 +58,8 @@ class MenuHandler
 
     public function handleHorario(string $from): void
     {
-        $nombre = config('bot.senefco.nombre');
-        $horarios = config('bot.senefco.horarios');
+        $nombre = config('bot.cenefco.nombre');
+        $horarios = config('bot.cenefco.horarios');
 
         $texto = "🕐 *Horarios de atención — {$nombre}*\n\n";
         foreach ($horarios as $dia => $hora) {
@@ -72,8 +72,8 @@ class MenuHandler
 
     public function handleUbicacion(string $from): void
     {
-        $loc = config('bot.senefco.ubicacion');
-        $nombre = config('bot.senefco.nombre');
+        $loc = config('bot.cenefco.ubicacion');
+        $nombre = config('bot.cenefco.nombre');
 
         $this->wa->sendLocation(
             $from,
@@ -93,7 +93,7 @@ class MenuHandler
 
     public function handleSoporte(string $from): void
     {
-        $tel = config('bot.senefco.contacto.telefono');
+        $tel = config('bot.cenefco.contacto.telefono');
         $this->wa->sendText(
             $from,
             "📞 *Atención ciudadana*\n\nUn operador te atenderá en breve.\n\nTambién puedes contactarnos directamente:\n📲 {$tel}"

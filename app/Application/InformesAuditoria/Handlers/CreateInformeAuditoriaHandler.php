@@ -15,15 +15,15 @@ class CreateInformeAuditoriaHandler
     public function handle(CreateInformeAuditoriaCommand $command): InformeAuditoriaDTO
     {
         $model = $this->repository->create([
-            'nombre'           => $command->nombre,
-            'descripcion'      => $command->descripcion,
-            'pdf_url'          => $command->pdf_url,
-            'pdf_nombre'       => $command->pdf_nombre,
-            'estado'           => $command->estado,
-            'fecha'            => $command->fecha,
-            'anio'             => $command->anio,
+            'nombre' => $command->nombre,
+            'descripcion' => $command->descripcion,
+            'pdf_url' => $command->pdf_url,
+            'pdf_nombre' => $command->pdf_nombre,
+            'estado' => $command->estado,
+            'fecha' => $command->fecha,
+            'anio' => $command->anio,
             'publicado_en_web' => $command->publicado_en_web,
-            'publicado_por'    => $command->publicado_por,
+            'publicado_por' => $command->publicado_por,
         ]);
 
         return InformeAuditoriaDTO::fromModel($model);

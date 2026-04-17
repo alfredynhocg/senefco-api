@@ -13,7 +13,7 @@
 
 help:
 	@echo ""
-	@echo " Senefco — Comandos disponibles"
+	@echo " cenefco — Comandos disponibles"
 	@echo ""
 	@echo " Setup"
 	@echo "  make setup            Instalacion completa desde cero"
@@ -295,19 +295,19 @@ sail-build:
 	./vendor/bin/sail build --no-cache
 
 docker-build:
-	docker build -t senefco-api:latest .
+	docker build -t cenefco-api:latest .
 
 docker-run:
-	docker run -d --name senefco_api --env-file ../.env.docker -p 8000:8000 senefco-api:latest
+	docker run -d --name cenefco_api --env-file ../.env.docker -p 8000:8000 cenefco-api:latest
 
 docker-stop:
-	docker stop senefco_api && docker rm senefco_api
+	docker stop cenefco_api && docker rm cenefco_api
 
 docker-logs:
-	docker logs -f senefco_api
+	docker logs -f cenefco_api
 
 docker-bash:
-	docker exec -it senefco_api bash
+	docker exec -it cenefco_api bash
 
 swagger:
 	php artisan l5-swagger:generate
