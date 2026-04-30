@@ -11,39 +11,77 @@ class PreinscripcionController extends Controller
 {
     public function store(Request $request): JsonResponse
     {
-        $data = $request->validate([
-            'programa_id' => ['nullable', 'integer'],
-            'nombre' => ['required', 'string', 'max:200'],
-            'apellido_paterno' => ['nullable', 'string', 'max:100'],
-            'apellido_materno' => ['nullable', 'string', 'max:100'],
-            'ci' => ['nullable', 'string', 'max:30'],
-            'expedido_id' => ['nullable', 'integer'],
-            'fecha_nacimiento' => ['nullable', 'date'],
-            'email' => ['required', 'email', 'max:100'],
-            'telefono' => ['nullable', 'string', 'max:20'],
-            'ciudad' => ['nullable', 'string', 'max:120'],
-            'provincia' => ['nullable', 'string', 'max:120'],
-            'medio_pago' => ['nullable', 'string', 'max:100'],
-            'monto_pagado' => ['nullable', 'numeric'],
-            'archivo_ci_anverso' => ['nullable', 'string', 'max:255'],
-            'archivo_titulo' => ['nullable', 'string', 'max:255'],
-            'archivo_cv' => ['nullable', 'string', 'max:255'],
-            'archivo_foto_3x3' => ['nullable', 'string', 'max:255'],
-            'sugerencia_curso' => ['nullable', 'string'],
-            'recomendar_docente' => ['nullable', 'boolean'],
-            'detalle_docente' => ['nullable', 'string'],
-            'mensaje' => ['nullable', 'string'],
-            'origen' => ['nullable', 'string', 'max:100'],
-        ]);
+        $baseRules = [
+            'programa_id'       => ['nullable', 'integer'],
+            'nombre'            => ['required', 'string', 'max:200'],
+            'apellido_paterno'  => ['nullable', 'string', 'max:100'],
+            'apellido_materno'  => ['nullable', 'string', 'max:100'],
+            'ci'                => ['nullable', 'string', 'max:30'],
+            'expedido_id'       => ['nullable', 'integer'],
+            'fecha_nacimiento'  => ['nullable', 'date'],
+            'email'             => ['required', 'email', 'max:100'],
+            'telefono'          => ['nullable', 'string', 'max:20'],
+            'ciudad'            => ['nullable', 'string', 'max:120'],
+            'provincia'         => ['nullable', 'string', 'max:120'],
+            'medio_pago'        => ['nullable', 'string', 'max:100'],
+            'monto_pagado'      => ['nullable', 'numeric'],
+            'archivo_ci_anverso'=> ['nullable', 'string', 'max:255'],
+            'archivo_titulo'    => ['nullable', 'string', 'max:255'],
+            'archivo_cv'        => ['nullable', 'string', 'max:255'],
+            'archivo_foto_3x3'  => ['nullable', 'string', 'max:255'],
+            'sugerencia_curso'  => ['nullable', 'string'],
+            'recomendar_docente'=> ['nullable', 'boolean'],
+            'detalle_docente'   => ['nullable', 'string'],
+            'mensaje'           => ['nullable', 'string'],
+            'origen'            => ['nullable', 'string', 'max:100'],
+            'campos_extra'      => ['nullable', 'array'],
+        ];
 
-        $data['estado'] = 'pendiente';
-        $data['ip_origen'] = $request->ip();
+        $camposDefinicion = [];
+        $programaId = $request->input('programa_id');
+        if ($programaId) {
+            $programa = DB::table('t_programa')->where('id_programa', $programaId)->first();
+            if ($programa && $programa->categoria_web_id) {
+                $camposDefinicion = DB::table('web_categoria_campo')
+                    ->where('categoria_id', $programa->categoria_web_id)
+                    ->where('activo', true)
+                    ->get();
+
+                foreach ($camposDefinicion as $campo) {
+                    $regla = $campo->requerido ? ['required'] : ['nullable'];
+
+                    $regla[] = match ($campo->tipo_campo) {
+                        'email'  => 'email',
+                        'number' => 'numeric',
+                        'date'   => 'date',
+                        'boolean'=> 'boolean',
+                        default  => 'string',
+                    };
+
+                    $baseRules["campos_extra.{$campo->nombre_campo}"] = $regla;
+                }
+            }
+        }
+
+        $data = $request->validate($baseRules);
+
+        if (isset($data['campos_extra']) && is_array($data['campos_extra'])) {
+            $data['campos_extra'] = json_encode($data['campos_extra']);
+        }
+
+        $data['estado']     = 'pendiente';
+        $data['ip_origen']  = $request->ip();
         $data['created_at'] = now()->toDateTimeString();
         $data['updated_at'] = now()->toDateTimeString();
 
         $id = DB::table('web_preinscripcion')->insertGetId($data);
 
-        return response()->json(DB::table('web_preinscripcion')->where('id', $id)->first(), 201);
+        $row = DB::table('web_preinscripcion')->where('id', $id)->first();
+        if ($row && is_string($row->campos_extra)) {
+            $row->campos_extra = json_decode($row->campos_extra);
+        }
+
+        return response()->json($row, 201);
     }
 
     public function index(Request $request): JsonResponse
@@ -84,7 +122,14 @@ class PreinscripcionController extends Controller
             ->orderBy('p.created_at', 'desc')
             ->offset($offset)
             ->limit($pageSize)
-            ->get();
+            ->get()
+            ->map(function ($row) {
+                if (is_string($row->campos_extra)) {
+                    $row->campos_extra = json_decode($row->campos_extra);
+                }
+
+                return $row;
+            });
 
         return response()->json(['data' => $items, 'total' => $total]);
     }
@@ -105,6 +150,10 @@ class PreinscripcionController extends Controller
 
         if (! $item) {
             abort(404, 'Preinscripción no encontrada');
+        }
+
+        if (is_string($item->campos_extra)) {
+            $item->campos_extra = json_decode($item->campos_extra);
         }
 
         return response()->json($item);

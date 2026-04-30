@@ -29,7 +29,7 @@ class UploadController extends Controller
     public function file(Request $request): JsonResponse
     {
         $request->validate([
-            'file' => ['required', 'file', 'max:20480', 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,mp3,mp4,wav,ogg'],
+            'file' => ['required', 'file', 'max:20480', 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,mp3,mp4,wav,ogg,jpg,jpeg,png,webp'],
         ]);
 
         $file = $request->file('file');

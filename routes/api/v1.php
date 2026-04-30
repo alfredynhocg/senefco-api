@@ -126,6 +126,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/categorias-programa/{id}', [\App\Http\Controllers\Api\CategoriaProgramaController::class, 'destroy'])
         ->middleware('permiso:contenido.eliminar');
 
+    Route::get('/categorias-programa/{categoriaId}/campos', [\App\Http\Controllers\Api\CategoriaCampoController::class, 'index']);
+    Route::post('/categorias-programa/{categoriaId}/campos', [\App\Http\Controllers\Api\CategoriaCampoController::class, 'store'])
+        ->middleware('permiso:contenido.crear');
+    Route::put('/categorias-programa/{categoriaId}/campos/{id}', [\App\Http\Controllers\Api\CategoriaCampoController::class, 'update'])
+        ->middleware('permiso:contenido.editar');
+    Route::delete('/categorias-programa/{categoriaId}/campos/{id}', [\App\Http\Controllers\Api\CategoriaCampoController::class, 'destroy'])
+        ->middleware('permiso:contenido.eliminar');
+    Route::post('/categorias-programa/{categoriaId}/campos/reorder', [\App\Http\Controllers\Api\CategoriaCampoController::class, 'reorder'])
+        ->middleware('permiso:contenido.editar');
+
     Route::get('/tipos-programa', [\App\Http\Controllers\Api\TipoProgramaController::class, 'index']);
 
     Route::get('/preinscripciones', [\App\Http\Controllers\Api\PreinscripcionController::class, 'index'])
@@ -782,9 +792,16 @@ Route::post('/public/upload/file', [\App\Http\Controllers\Api\UploadController::
 
 Route::get('/public/cursos', [\App\Http\Controllers\Api\CursoController::class, 'index']);
 Route::get('/public/cursos/{id}', [\App\Http\Controllers\Api\CursoController::class, 'show']);
+Route::get('/public/categorias-programa/{categoriaId}/campos', [\App\Http\Controllers\Api\CategoriaCampoController::class, 'index']);
 
 Route::middleware(['auth:sanctum'])->prefix('moodle')->group(function () {
     Route::get('/courses', [\App\Http\Controllers\Api\MoodleCourseController::class, 'index']);
     Route::post('/courses', [\App\Http\Controllers\Api\MoodleCourseController::class, 'store']);
     Route::post('/courses/from-curso/{id}', [\App\Http\Controllers\Api\MoodleCourseController::class, 'fromCurso']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('zoom')->group(function () {
+    Route::get('/meetings',  [\App\Http\Controllers\Api\ZoomController::class, 'meetings']);
+    Route::post('/meetings', [\App\Http\Controllers\Api\ZoomController::class, 'crearReunion']);
+    Route::get('/recordings', [\App\Http\Controllers\Api\ZoomController::class, 'recordings']);
 });

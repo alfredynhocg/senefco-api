@@ -93,7 +93,25 @@ class CursoController extends Controller
             abort(404, 'Curso no encontrado');
         }
 
-        return response()->json($curso);
+        $campos = [];
+        if ($curso->categoria_web_id) {
+            $campos = DB::table('web_categoria_campo')
+                ->where('categoria_id', $curso->categoria_web_id)
+                ->where('activo', true)
+                ->orderBy('orden')
+                ->orderBy('id')
+                ->get()
+                ->map(function ($c) {
+                    $c->opciones   = $c->opciones   ? json_decode($c->opciones)   : null;
+                    $c->validacion = $c->validacion ? json_decode($c->validacion) : null;
+
+                    return $c;
+                })
+                ->values()
+                ->all();
+        }
+
+        return response()->json(array_merge((array) $curso, ['categoria_campos' => $campos]));
     }
 
     public function store(Request $request): JsonResponse
